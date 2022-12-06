@@ -13,7 +13,7 @@
 	<artifactId>msmjlssc-administracion</artifactId>
 	<version>1.0.0</version>
 	<name>msmjlssc-administracion</name>
-	<description>Microservicio AdministracionModulo Juicio Laboral</description>
+	<description>Microservicio Administracion Modulo Juicio Laboral</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

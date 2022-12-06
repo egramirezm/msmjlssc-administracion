@@ -40,7 +40,7 @@ logging:
     console: "%d %-5level %logger : %msg%n"
     file: "%d %-5level [%thread] %logger : %msg%n"
   level:
-    org.hibernate.SQL: DEBUG
+    org.hibernate.SQL: ${MJLSSC_LOG_LEVEL}
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.springframework: INFO
     mx.gob.imss.cit.mjlssc: ${MJLSSC_LOG_LEVEL}
