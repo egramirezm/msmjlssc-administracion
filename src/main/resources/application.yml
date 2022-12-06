@@ -1,0 +1,141 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: America/Mexico_City
+    locale: es_MX    
+    serialization:
+      fail-on-empty-beans: false
+  profiles: default
+  datasource:
+    url: ${CADENA_CONEXION_DB_MJLSSC}
+    username: ${USER_DB_MJLSSC}
+    password: ${PASSWORD_DB_MJLSSC}
+    driverClassName: org.mariadb.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: America/Mexico_City
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+  
+server:
+  servlet:
+    contextPath: /msmjlssc-administracion/v1
+  port: 8080
+  
+authorization:
+  signingKey: ${SIGNING_KEY_OAUTH}
+
+info:
+  component: Microservicio Para Funcionalidad Administracion Modulo Juicio Laboral MJL
+
+logging:
+  file:
+    name: msmjlssc-administracion.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework: INFO
+    mx.gob.imss.cit.mjlssc: ${MJLSSC_LOG_LEVEL}
+    
+management:
+  endpoints:
+    web:
+      base-path: /msmjlssc-administracion/actuator
+      exposure:
+        include: health, info, env, beans, metrics, threaddump, vigencia, genericEndPoints
+  endpoint:
+    health:
+      show-details: always
+    security:
+      enabled: false
+  health:
+    defaults:
+      enabled: false
+    db:
+      enabled: true
+    ping:
+      enabled: true
+  info:
+    git:
+      mode: full
+nml:
+  schema: ${MJLSSC_NML_SCHEMA}
+---
+spring:
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: America/Mexico_City
+    locale: es_MX    
+    serialization:
+      fail-on-empty-beans: false
+  profiles: local
+  datasource:
+    url: jdbc:mariadb://10.100.8.166:3306/MAISSCBDQA01?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: MAISSCBD_USER
+    password: M55ACBDI_U534
+    driverClassName: org.mariadb.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: America/Mexico_City
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+  
+server:
+  servlet:
+    contextPath: /msmjlssc-administracion/v1
+  port: 9093
+
+info:
+  component: Microservicio para la funcionalidad del modulo juicio laboral
+  
+authorization:
+  signingKey: algun_codigo_secreto_qwerty_pa_validar_token
+
+logging:
+  file:
+    name: msmjlssc-administracion.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    org.springframework: INFO
+    mx.gob.imss.cit.mjlssc: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+management:
+  endpoints:
+    web:
+      base-path: /msmjlssc-administracion/actuator
+      exposure:
+        include: health, info, env, beans, metrics, threaddump, vigencia, genericEndPoints
+  endpoint:
+    health:
+      show-details: always
+    security:
+      enabled: false
+  health:
+    defaults:
+      enabled: false
+    db:
+      enabled: true
+    ping:
+      enabled: true
+  info:
+    git:
+      mode: full
+nml:
+  schema: NMLSSCBDQA01
