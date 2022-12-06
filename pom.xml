@@ -12,7 +12,7 @@
 	<groupId>mx.gob.imss.cit.mjlssc</groupId>
 	<artifactId>msmjlssc-administracion</artifactId>
 	<version>1.0.0</version>
-	<name>msmjlssc-base</name>
+	<name>msmjlssc-administracion</name>
 	<description>Microservicio AdministracionModulo Juicio Laboral</description>
 	<properties>
 		<java.version>1.8</java.version>
