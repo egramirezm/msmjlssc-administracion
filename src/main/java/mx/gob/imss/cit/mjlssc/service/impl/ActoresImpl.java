@@ -33,7 +33,7 @@ public class ActoresImpl implements ActoresService {
 	@Override
 	public List<MjltAsuntoActorDto> getActoresSecundarios() {
 		log.info("Inicio getActoresSecundarios");
-			List<MjltAsuntoActor> dboList = mjltAsuntoActorRepository.findByIndActorPrincipal(false);
+			List<MjltAsuntoActor> dboList = mjltAsuntoActorRepository.findAll();
 			if(!dboList.isEmpty()) {
 				return ObjectMapperUtils.mapAll(dboList, MjltAsuntoActorDto.class);
 			}
