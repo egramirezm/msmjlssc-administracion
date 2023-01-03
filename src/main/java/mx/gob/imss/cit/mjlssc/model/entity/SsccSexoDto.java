@@ -2,6 +2,7 @@ package mx.gob.imss.cit.mjlssc.model.entity;
 
 import lombok.Data;
 import mx.gob.imss.cit.mjlssc.persistence.entity.SsccSexo;
+import mx.gob.imss.cit.nmlssc.support.model.BaseModel;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +13,7 @@ import java.util.Date;
  * A DTO for the {@link SsccSexo} entity
  */
 @Data
-public class SsccSexoDto implements Serializable {
+public class SsccSexoDto  extends BaseModel implements Serializable {
     /**
 	 * 
 	 */
