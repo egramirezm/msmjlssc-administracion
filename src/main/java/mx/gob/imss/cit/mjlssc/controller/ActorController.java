@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.log4j.Log4j2;
 import mx.gob.imss.cit.mjlssc.model.entity.MjltAsuntoActorDto;
 import mx.gob.imss.cit.mjlssc.model.entity.ResponseDataDTO;
+import mx.gob.imss.cit.mjlssc.model.request.AsignarActorRequestDto;
 import mx.gob.imss.cit.mjlssc.service.ActoresService;
 import mx.gob.imss.cit.mjlssc.utils.Constantes;
 
@@ -48,5 +51,17 @@ public class ActorController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+//Se incorpora guardado de actores a un asunto exitente.
+	
+	@PostMapping
+	public ResponseEntity<?> asignar(@RequestBody AsignarActorRequestDto request) {
+		try {
+			return actoresService.addActoresToAsunto(request.getActores());
+			
+		} catch (Exception e) {
+			
+			return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		}
+	}
 }
