@@ -10,7 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "SSCC_UMF", catalog = DataBaseShemaConf.SCHEMANML)
+//, catalog = DataBaseShemaConf.SCHEMANML
+@Table(name = "SSCC_UMF")
 public class SsccUmf implements Serializable {
 	private static final long serialVersionUID = 4166019549960337149L;
 	@Id

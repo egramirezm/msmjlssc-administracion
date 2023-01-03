@@ -52,4 +52,17 @@ public class UmfServiceImpl implements UmfService {
 		return umfDtos;
 	}
 
+	@Override
+	public List<SsccUmfDto> findByDesUmfconContainingIgnoreCase(String desUmf) {
+		log.info("Inicio UmfServiceImpl findByDesUmfconContainingIgnoreCase");
+		List<SsccUmfDto> umfDtos = new ArrayList<>();
+
+		List<SsccUmf> umfList = umSsccUmfRepository.findByDesUmfContainingIgnoreCase(desUmf);
+		if (!CollectionUtils.isEmpty(umfList)) {
+			umfDtos = umfAssembler.assembleList(umfList);
+		}
+
+		return umfDtos;
+	}
+
 }

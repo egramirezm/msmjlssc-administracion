@@ -13,6 +13,14 @@ import mx.gob.imss.cit.mjlssc.model.entity.SsccUmfDto;
  */
 public interface UmfService {
 
+	/**
+	 * @return
+	 */
 	List<SsccUmfDto> getSUmfList();
+	/**
+	 * @param desUmf
+	 * @return
+	 */
+	public List<SsccUmfDto> findByDesUmfconContainingIgnoreCase(String desUmf);
 
 }
