@@ -32,7 +32,6 @@ public class UmfController {
 	@Autowired
 	private UmfService umfService;
 	private List<SsccUmfDto> resultList;
-
 	
 	@GetMapping("/getUmfList")
 	public ResponseEntity<ResponseDataDTO<List<SsccUmfDto>>> get() {
