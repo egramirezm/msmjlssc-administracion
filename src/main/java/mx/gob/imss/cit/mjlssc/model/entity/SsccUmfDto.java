@@ -3,6 +3,7 @@ package mx.gob.imss.cit.mjlssc.model.entity;
 
 import lombok.Data;
 import mx.gob.imss.cit.mjlssc.persistence.entity.SsccUmf;
+import mx.gob.imss.cit.nmlssc.support.model.BaseModel;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,7 +14,7 @@ import java.util.Date;
  * A DTO for the {@link SsccUmf} entity
  */
 @Data
-public class SsccUmfDto implements Serializable {
+public class SsccUmfDto extends BaseModel implements Serializable {
     /**
 	 * 
 	 */
