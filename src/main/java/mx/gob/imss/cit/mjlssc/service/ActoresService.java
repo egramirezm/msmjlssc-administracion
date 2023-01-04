@@ -24,6 +24,8 @@ public interface ActoresService {
 	 * @return
 	 */
 	ResponseEntity<?> addActoresToAsunto(List<MjltAsuntoActorDto> actores);
+	
+	List<MjltAsuntoActorDto> getActoresByAsunto(Integer estatus, Integer cvAsunto);
 
 	
 

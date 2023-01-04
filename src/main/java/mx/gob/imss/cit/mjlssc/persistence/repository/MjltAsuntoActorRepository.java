@@ -1,5 +1,7 @@
 package mx.gob.imss.cit.mjlssc.persistence.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,4 +28,6 @@ public interface MjltAsuntoActorRepository extends JpaRepository<MjltAsuntoActor
             "where " +
                   "asuntoAct.cveAsunto.id = ?1 ")
 	 public void deleteAllActoresByIdAsunto(Integer idAsunto);
+	
+	List<MjltAsuntoActor> findByIndActorPrincipalAndCveAsuntoId(boolean estatus, Integer cveAsunto);
 }

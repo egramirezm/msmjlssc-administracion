@@ -79,11 +79,11 @@ spring:
   profiles: local
   datasource:
     #url: jdbc:mariadb://10.100.8.166:3306/MAISSCBDQA01?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    url: jdbc:mariadb://localhost:3306/nmldb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mariadb://localhost:3306/mjldb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     #username: MAISSCBD_USER
     #password: M55ACBDI_U534
     username: root
-    password: root
+    password: admin
     driverClassName: org.mariadb.jdbc.Driver
   jpa:
     properties:

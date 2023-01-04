@@ -88,6 +88,17 @@ public class ActoresImpl implements ActoresService {
 		}
 	
 	}
+	
+	@Override
+	public List<MjltAsuntoActorDto> getActoresByAsunto(Integer estatus, Integer cveAsunto) {
+		log.info("Inicio getActoresByEstatus");
+		//TODO: falta logica para filtrar por el estatus y regresar tambien los actores Encontrados y Pendientes
+		List<MjltAsuntoActor> dboList = mjltAsuntoActorRepository.findByIndActorPrincipalAndCveAsuntoId(false, cveAsunto);
+		if(!dboList.isEmpty()) {
+			return ObjectMapperUtils.mapAll(dboList, MjltAsuntoActorDto.class);
+		}
+		return Collections.emptyList();
+	}
 
 
 }
