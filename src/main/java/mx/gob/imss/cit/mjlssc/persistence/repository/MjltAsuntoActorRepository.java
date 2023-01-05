@@ -1,5 +1,6 @@
 package mx.gob.imss.cit.mjlssc.persistence.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -30,4 +31,15 @@ public interface MjltAsuntoActorRepository extends JpaRepository<MjltAsuntoActor
 	 public void deleteAllActoresByIdAsunto(Integer idAsunto);
 	
 	List<MjltAsuntoActor> findByIndActorPrincipalAndCveAsuntoId(boolean estatus, Integer cveAsunto);
+
+	@Modifying
+	@Transactional
+    @Query(value = "update "
+    		+ "MjltAsuntoActor a "
+    		+ "set "
+    		+ "a.cveUsuarioBaja = :cveUsuario,"
+    		+ "a.fecBaja = :fechaBaja "
+    		+ "where "
+    		+ "a.id = :idAsuntoActor")
+	public int deleteActor(Integer idAsuntoActor, String cveUsuario, Date fechaBaja);
 }

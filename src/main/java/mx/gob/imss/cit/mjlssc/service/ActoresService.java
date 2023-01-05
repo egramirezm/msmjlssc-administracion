@@ -26,6 +26,7 @@ public interface ActoresService {
 	ResponseEntity<?> addActoresToAsunto(List<MjltAsuntoActorDto> actores);
 	
 	List<MjltAsuntoActorDto> getActoresByAsunto(Integer estatus, Integer cvAsunto);
+	void deleteActor(Integer idAsuntoActor, String cveUsuario);
 
 	
 

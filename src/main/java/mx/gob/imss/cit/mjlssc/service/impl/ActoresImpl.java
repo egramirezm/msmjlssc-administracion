@@ -3,8 +3,8 @@
  */
 package mx.gob.imss.cit.mjlssc.service.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -98,6 +98,13 @@ public class ActoresImpl implements ActoresService {
 			return ObjectMapperUtils.mapAll(dboList, MjltAsuntoActorDto.class);
 		}
 		return Collections.emptyList();
+	}
+	@Override
+	public void deleteActor(Integer idAsuntoActor, String cveUsuario) {
+		log.info("Inicio deleteActor:{}", idAsuntoActor);
+		int result = mjltAsuntoActorRepository.deleteActor(idAsuntoActor, cveUsuario, new Date());
+		log.info("deleteActor.registro actualizado:{}", result);
+		
 	}
 
 

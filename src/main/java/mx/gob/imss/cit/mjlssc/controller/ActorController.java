@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,10 @@ public class ActorController {
 	private ActoresService actoresService;
 
 	
+	/**
+	 * Consulta todos los actores secundarios
+	 * @return
+	 */
 	@GetMapping("/secundarios")
 	public ResponseEntity<ResponseDataDTO<List<MjltAsuntoActorDto>>> get() {
 		try {
@@ -66,6 +71,12 @@ public class ActorController {
 		}
 	}
 	
+	/**
+	 * Consulta los actores por asunto y estatus (secundarios, encontrados y pendientes)
+	 * @param estatus
+	 * @param cveAsunto
+	 * @return
+	 */
 	@GetMapping("/byAsunto")
 	public ResponseEntity<ResponseDataDTO<List<MjltAsuntoActorDto>>> getActoresByAsunto(@RequestParam Integer estatus, @RequestParam Integer cveAsunto) {
 		try {
@@ -80,6 +91,21 @@ public class ActorController {
 		} catch (Exception e) {
 			ResponseDataDTO<List<MjltAsuntoActorDto>> response = new ResponseDataDTO<>(Constantes.STATUS_500, Constantes.INTERNAL_SERVER_ERROR.concat(e.toString()), null);
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * Consulta los actores por asunto y estatus (secundarios, encontrados y pendientes)
+	 * @param estatus
+	 * @param cveAsunto
+	 * @return
+	 */
+	@PutMapping("/delete")
+	public void deleteActor(@RequestParam Integer idAsuntoActor, @RequestParam String cveUsuario) {
+		try {
+			actoresService.deleteActor(idAsuntoActor, cveUsuario);
+		} catch (Exception e) {
+			log.info(e.getMessage());
 		}
 	}
 }
