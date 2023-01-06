@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -125,5 +126,11 @@ public class ActorController {
 			ResponseDataDTO<MjltAsuntoActorDto> response = new ResponseDataDTO<>(Constantes.STATUS_500,Constantes.INTERNAL_SERVER_ERROR.concat(e.toString()), null);
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@GetMapping("/detalle/{cveAsuntoActor}")
+	public ResponseEntity<?> getDetalleActor(@PathVariable Integer cveAsuntoActor) {
+		log.info("getDetalleActor:", cveAsuntoActor);
+		return actoresService.getDetalleActor(cveAsuntoActor);
 	}
 }

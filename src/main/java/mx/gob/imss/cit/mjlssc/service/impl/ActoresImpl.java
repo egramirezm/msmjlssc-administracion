@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -123,4 +124,20 @@ public class ActoresImpl implements ActoresService {
 
 	}
 
+	@Override
+	public ResponseEntity<?> getDetalleActor(Integer cveAsuntoActor) {
+		log.info("Inicio getDetalleActor", cveAsuntoActor);
+		try {
+			Optional<MjltAsuntoActor> mjltAsuntoActor = mjltAsuntoActorRepository.findById(cveAsuntoActor);
+			if (mjltAsuntoActor.isPresent()) {
+				MjltAsuntoActorDto asuntoActorDto = ObjectMapperUtils.map(mjltAsuntoActor.get(),MjltAsuntoActorDto.class);
+				return new ResponseEntity<>(asuntoActorDto, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			log.error("Error al getDetalleActor ", e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
