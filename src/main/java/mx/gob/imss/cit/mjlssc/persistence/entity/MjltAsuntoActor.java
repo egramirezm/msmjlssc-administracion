@@ -286,13 +286,13 @@ public class MjltAsuntoActor {
 
     @Size(max = 60)
     @NotNull
-    @Column(name = "CVE_USUARIO_ALTA", nullable = false, length = 60)
+    @Column(name = "CVE_USUARIO_ALTA", length = 60, updatable = false)
     private String cveUsuarioAlta;
 
     @Size(max = 60)
     @Column(name = "CVE_USUARIO_BAJA", length = 60)
     private String cveUsuarioBaja;
-
+    
     @Size(max = 60)
     @Column(name = "CVE_USUARIO_MODIFICA", length = 60)
     private String cveUsuarioModifica;

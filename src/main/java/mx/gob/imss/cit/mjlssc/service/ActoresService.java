@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import mx.gob.imss.cit.mjlssc.model.entity.MjltAsuntoActorDto;
+import mx.gob.imss.cit.mjlssc.model.request.EditarActorRequestDto;
+import mx.gob.imss.cit.mjlssc.persistence.entity.MjltAsuntoActor;
 
 /**
  * @author
@@ -27,6 +29,7 @@ public interface ActoresService {
 	
 	List<MjltAsuntoActorDto> getActoresByAsunto(Integer estatus, Integer cvAsunto);
 	void deleteActor(Integer idAsuntoActor, String cveUsuario);
+	EditarActorRequestDto updateActor(EditarActorRequestDto editarActorRequestDto);
 
 	
 

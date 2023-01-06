@@ -18,6 +18,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.log4j.Log4j2;
 import mx.gob.imss.cit.mjlssc.model.entity.MjltAsuntoActorDto;
+import mx.gob.imss.cit.mjlssc.model.request.EditarActorRequestDto;
 import mx.gob.imss.cit.mjlssc.persistence.entity.MjltAsuntoActor;
 import mx.gob.imss.cit.mjlssc.persistence.repository.MjltAsuntoActorRepository;
 import mx.gob.imss.cit.mjlssc.service.ActoresService;
@@ -107,5 +108,20 @@ public class ActoresImpl implements ActoresService {
 		
 	}
 
+	@Transactional
+	@Override
+	public EditarActorRequestDto updateActor(EditarActorRequestDto editarActorRequestDto) {
+		log.info("Inicio addActoresToAsunto");
+
+		try {
+			MjltAsuntoActor entity = new MjltAsuntoActor();
+			MjltAsuntoActor response = mjltAsuntoActorRepository.save(ObjectMapperUtils.map(editarActorRequestDto, entity));
+			return ObjectMapperUtils.map(response, EditarActorRequestDto.class);
+		} catch (Exception e) {
+			log.error("Error al actualizar el actor ", e);
+			return null;
+		}
+
+	}
 
 }
