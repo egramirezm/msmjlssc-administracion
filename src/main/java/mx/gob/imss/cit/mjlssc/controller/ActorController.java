@@ -109,7 +109,7 @@ public class ActorController {
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<ResponseDataDTO<MjltAsuntoActorDto>> editar(@RequestBody MjltAsuntoActorDto mjltAsuntoActorDto) {
 
 		try {
