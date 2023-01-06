@@ -20,7 +20,6 @@ import lombok.extern.log4j.Log4j2;
 import mx.gob.imss.cit.mjlssc.model.entity.MjltAsuntoActorDto;
 import mx.gob.imss.cit.mjlssc.model.entity.ResponseDataDTO;
 import mx.gob.imss.cit.mjlssc.model.request.AsignarActorRequestDto;
-import mx.gob.imss.cit.mjlssc.model.request.EditarActorRequestDto;
 import mx.gob.imss.cit.mjlssc.service.ActoresService;
 import mx.gob.imss.cit.mjlssc.utils.Constantes;
 
@@ -111,20 +110,19 @@ public class ActorController {
 	}
 	
 	@PostMapping("/update")
-	public ResponseEntity<ResponseDataDTO<EditarActorRequestDto>> editar(
-			@RequestBody EditarActorRequestDto editarActorRequestDto) {
+	public ResponseEntity<ResponseDataDTO<MjltAsuntoActorDto>> editar(@RequestBody MjltAsuntoActorDto mjltAsuntoActorDto) {
 
 		try {
-			EditarActorRequestDto result = actoresService.updateActor(editarActorRequestDto);
-			if (result instanceof EditarActorRequestDto) {
-				ResponseDataDTO<EditarActorRequestDto> response = new ResponseDataDTO<>(Constantes.STATUS_200,Constantes.OK, result);
+			MjltAsuntoActorDto result = actoresService.updateActor(mjltAsuntoActorDto);
+			if (result instanceof MjltAsuntoActorDto) {
+				ResponseDataDTO<MjltAsuntoActorDto> response = new ResponseDataDTO<>(Constantes.STATUS_200,Constantes.OK, result);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
-				ResponseDataDTO<EditarActorRequestDto> response = new ResponseDataDTO<>(Constantes.STATUS_500, Constantes.INTERNAL_SERVER_ERROR, result);
+				ResponseDataDTO<MjltAsuntoActorDto> response = new ResponseDataDTO<>(Constantes.STATUS_500, Constantes.INTERNAL_SERVER_ERROR, result);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			}
 		} catch (Exception e) {
-			ResponseDataDTO<EditarActorRequestDto> response = new ResponseDataDTO<>(Constantes.STATUS_500,Constantes.INTERNAL_SERVER_ERROR.concat(e.toString()), null);
+			ResponseDataDTO<MjltAsuntoActorDto> response = new ResponseDataDTO<>(Constantes.STATUS_500,Constantes.INTERNAL_SERVER_ERROR.concat(e.toString()), null);
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
