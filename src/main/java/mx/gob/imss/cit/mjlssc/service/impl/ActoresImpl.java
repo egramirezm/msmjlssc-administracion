@@ -15,12 +15,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.util.CollectionUtils;
 
 import lombok.extern.log4j.Log4j2;
 import mx.gob.imss.cit.mjlssc.model.entity.MjltAsuntoActorDto;
 import mx.gob.imss.cit.mjlssc.persistence.entity.MjltAsuntoActor;
 import mx.gob.imss.cit.mjlssc.persistence.repository.MjltAsuntoActorRepository;
 import mx.gob.imss.cit.mjlssc.service.ActoresService;
+import mx.gob.imss.cit.mjlssc.utils.Constantes;
 import mx.gob.imss.cit.mjlssc.utils.ObjectMapperUtils;
 
 /**
@@ -100,11 +102,17 @@ public class ActoresImpl implements ActoresService {
 		return Collections.emptyList();
 	}
 	@Override
-	public void deleteActor(Integer idAsuntoActor, String cveUsuario) {
+	public ResponseEntity<?> deleteActor(Integer idAsuntoActor, String cveUsuario) {
 		log.info("Inicio deleteActor:{}", idAsuntoActor);
-		int result = mjltAsuntoActorRepository.deleteActor(idAsuntoActor, cveUsuario, new Date());
-		log.info("deleteActor.registro actualizado:{}", result);
-		
+		int result = 0;
+		try {
+			result = mjltAsuntoActorRepository.deleteActor(idAsuntoActor, cveUsuario, new Date());
+			log.info("deleteActor.registro eliminado:{}", result);
+			return new ResponseEntity<>("Registros eliminados:" + result, HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Error al eliminar el actor principal ", e);
+			return new ResponseEntity<>("Registros eliminados" + result, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@Transactional
@@ -123,4 +131,25 @@ public class ActoresImpl implements ActoresService {
 
 	}
 
+	@Override
+	public ResponseEntity<?> changePrincipal(Integer cveAsunto, Integer cveAsuntoActor, String cveUsuarioMod) {
+		int result = 0;
+		try {
+			List<MjltAsuntoActor> principalOld = mjltAsuntoActorRepository
+					.findByIndActorPrincipalAndCveAsuntoId(Boolean.TRUE, cveAsunto);
+			if (!CollectionUtils.isEmpty(principalOld)) {
+				mjltAsuntoActorRepository.updatePrincipal(principalOld.get(0).getId(),
+						principalOld.get(0).getCveAsunto().getId(), Boolean.FALSE, cveUsuarioMod);
+				result = mjltAsuntoActorRepository.updatePrincipal(cveAsuntoActor, cveAsunto, Boolean.TRUE,
+						cveUsuarioMod);
+				log.info("registro actualizado:{}|cveAsuntoActor:{}", result, cveAsuntoActor);
+				return new ResponseEntity<>(Constantes.REGISTROS_ACTUALIZADOS + result, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(Constantes.REGISTROS_ACTUALIZADOS + result, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			log.error("Error al cambiar el actor principal ", e);
+			return new ResponseEntity<>(Constantes.REGISTROS_ACTUALIZADOS, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

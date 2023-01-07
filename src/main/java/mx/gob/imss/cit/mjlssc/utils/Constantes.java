@@ -19,5 +19,7 @@ public final class Constantes {
 	public static final String NO_CONTENT = "Ningún contenido en la solicitud";
 	public static final String INTERNAL_SERVER_ERROR = "Problema en el servidor web";
 	public static final String OK = "Transacción exitosa";
+	public static final String REGISTROS_ACTUALIZADOS = "Registros actualizados:";
+	
 
 }

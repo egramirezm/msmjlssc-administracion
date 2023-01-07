@@ -101,11 +101,12 @@ public class ActorController {
 	 * @return
 	 */
 	@PutMapping("/delete")
-	public void deleteActor(@RequestParam Integer idAsuntoActor, @RequestParam String cveUsuario) {
+	public ResponseEntity<?> deleteActor(@RequestParam Integer idAsuntoActor, @RequestParam String cveUsuario) {
 		try {
-			actoresService.deleteActor(idAsuntoActor, cveUsuario);
+			return actoresService.deleteActor(idAsuntoActor, cveUsuario);
 		} catch (Exception e) {
 			log.info(e.getMessage());
+			return new ResponseEntity<>(actoresService.deleteActor(idAsuntoActor, cveUsuario), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -124,6 +125,17 @@ public class ActorController {
 		} catch (Exception e) {
 			ResponseDataDTO<MjltAsuntoActorDto> response = new ResponseDataDTO<>(Constantes.STATUS_500,Constantes.INTERNAL_SERVER_ERROR.concat(e.toString()), null);
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PutMapping("/changePrincipal")
+	public ResponseEntity<?> changePrincipal(@RequestParam Integer cveAsunto, @RequestParam Integer cveAsuntoActor,
+			@RequestParam String cveUsuarioMod) {
+		try {
+			return actoresService.changePrincipal(cveAsunto, cveAsuntoActor, cveUsuarioMod);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(actoresService.changePrincipal(cveAsunto, cveAsuntoActor, cveUsuarioMod), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
