@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -102,12 +103,8 @@ public class ActorController {
 	 */
 	@PutMapping("/delete")
 	public ResponseEntity<?> deleteActor(@RequestParam Integer idAsuntoActor, @RequestParam String cveUsuario) {
-		try {
+		log.info("deleteActor:{},{}",idAsuntoActor, cveUsuario);
 			return actoresService.deleteActor(idAsuntoActor, cveUsuario);
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<>(actoresService.deleteActor(idAsuntoActor, cveUsuario), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 	
 	@PutMapping("/update")
@@ -128,14 +125,16 @@ public class ActorController {
 		}
 	}
 	
+
 	@PutMapping("/changePrincipal")
-	public ResponseEntity<?> changePrincipal(@RequestParam Integer cveAsunto, @RequestParam Integer cveAsuntoActor,
-			@RequestParam String cveUsuarioMod) {
-		try {
-			return actoresService.changePrincipal(cveAsunto, cveAsuntoActor, cveUsuarioMod);
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<>(actoresService.changePrincipal(cveAsunto, cveAsuntoActor, cveUsuarioMod), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<?> changePrincipal(@RequestParam Integer cveAsunto, @RequestParam Integer cveAsuntoActor,@RequestParam String cveUsuarioMod) {
+		log.info("changePrincipal:{},{},{}",cveAsunto,cveAsuntoActor,cveUsuarioMod);
+			return actoresService.changePrincipal(cveAsunto, cveAsuntoActor, cveUsuarioMod);			
+	}
+		
+	@GetMapping("/detalle/{cveAsuntoActor}")
+	public ResponseEntity<?> getDetalleActor(@PathVariable Integer cveAsuntoActor) {
+		log.info("getDetalleActor:", cveAsuntoActor);
+		return actoresService.getDetalleActor(cveAsuntoActor);
 	}
 }
