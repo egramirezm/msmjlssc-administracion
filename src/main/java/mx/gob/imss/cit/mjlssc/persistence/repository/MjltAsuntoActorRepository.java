@@ -59,6 +59,10 @@ public interface MjltAsuntoActorRepository extends JpaRepository<MjltAsuntoActor
     		+ "a.cveAsunto.id = :idAsunto ")
 	public int updatePrincipal(Integer cveAsuntoActor, Integer idAsunto, Boolean ind, String cveUsuarioMod);
 
+    @Query(value = "SELECT u FROM MjltAsuntoActor u "
+    		+ "WHERE u.fecBaja IS NULL ")
+	public List<MjltAsuntoActor> findAllSecundarios();
+
 
 	
 }
